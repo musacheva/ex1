@@ -9,7 +9,7 @@ public class sessio1 {
 		int files = files();
 		int columnes = columnes();
 
-		int tauler[][] = new int[files][columnes]; // Creaci� del tauler
+		int tauler[][] = new int[files][columnes]; // Creació del tauler
 
 		int valor = valor(files, columnes);
 		EncenAleatori(files, columnes, tauler, valor);
@@ -40,7 +40,7 @@ public class sessio1 {
 	public static int columnes() {
 
 		System.out.println("Indica les dimensions del taulell");
-		System.out.println("Entra un número de columnes>2 i <=12");
+		System.out.println("Entra un número de files>2 i <=12");
 		int columnes = Keyboard.readInt();
 
 		while (columnes <= 2 || columnes > 12) {
@@ -66,15 +66,15 @@ public class sessio1 {
 	public static void EncenAleatori(int files, int columnes, int tauler[][], int valor) {
 		int i = 0;
 		while (i < valor) {
-			int filaAleatoria = (int) Math.round(Math.random() * files);
-			int ColumnaAleatoria = (int) Math.round(Math.random() * columnes);
+			int filaAleatoria = (int) Math.round(Math.random() * (files - 1));
+			int ColumnaAleatoria = (int) Math.round(Math.random() * (columnes - 1));
 
 			if (tauler[filaAleatoria][ColumnaAleatoria] == 0) {
 				tauler[filaAleatoria][ColumnaAleatoria] = 1;
 			} else {
 				while (tauler[filaAleatoria][ColumnaAleatoria] == 1) {
-					filaAleatoria = (int) Math.round(Math.random() * files);
-					ColumnaAleatoria = (int) Math.round(Math.random() * columnes );
+					filaAleatoria = (int) Math.round(Math.random() * (files - 1));
+					ColumnaAleatoria = (int) Math.round(Math.random() * (columnes - 1));
 				}
 			}
 			i++;
@@ -128,22 +128,38 @@ public class sessio1 {
 
 	private static void CanviEstat(int[][] tauler, int fila, int columna) {
 		
-		if(fila==0 || fila==tauler.length){
-			if(columna==0 || columna==tauler[0].length-1){
-				
-			}else{
-				
-			}
+		
+		if(columna==0 && fila==0){
 			
+			//columna==1 fila==0      //columna=columna+1 fila=fila
+			//columna==0 fila==1
+			//columna==0 fila==tauler.length-1
+			//columna==tauler[0].length-1	fila==0
+	
+		}
+		if(columna==tauler[0].length-1 && fila==0){
+			
+			//columna==tauler[0].length-1 && fila==0
+			//columna==tauler[0].length-1 && fila==1
+			//columna==tauler[0].length-1 && fila==tauler.length-1
+			//columna==tauler[0].length-1 && fila==0
+			//columna==0 && fila==0
+		}
+		if(columna==0 && fila==tauler.length-1){
+			
+			//columna==0 && fila==tauler.length-1
+			//columna==1 && fila==tauler.length-1
+			//columna==0 && fila==tauler.length-2
+			//columna==0 && fila==0	
+			//columna=tauler[0].length-1 && fila=tauler.length
 		}
 		
-		
-		
-		
-		if (tauler[fila][columna] == 0) {
-			tauler[fila][columna] = 1;
-		} else {
-			tauler[fila][columna] = 0;
+		if(columna==tauler[0].length-1 && fila==tauler.length-1){
+			
+			//columna==tauler[0].length && fila==0
+			//
+			//
+			
 		}
 		
 
