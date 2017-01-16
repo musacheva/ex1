@@ -2,7 +2,7 @@ package Sessio1_MikhailDavid;
 
 import Keyboard.*;
 
-public class sessio1 {//comentario
+public class sessio1 {//comentari
 
 	public static void main(String args[]) {
 
