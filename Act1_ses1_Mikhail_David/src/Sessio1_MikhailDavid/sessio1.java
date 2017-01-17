@@ -4,27 +4,25 @@ import Keyboard.*;
 
 public class sessio1 {
 
-	public static void main(String args[]) {//hoisfowifnq
+	public static void main(String args[]) {
 
 		int files = files();
 		int columnes = columnes();
-
-		int tauler[][] = new int[files][columnes]; // Creació del tauler
-
-		valor(tauler,files, columnes);
+		int tauler[][] = new int[files][columnes]; 
+		int valor=valor(tauler,files, columnes);
+		EncenAleatori(files, columnes, tauler, valor);
 		RecorreTauler(tauler);
 		bucle(tauler,files,columnes);
+		Finalitzacio(files,columnes,valor,tauler);	
 	}
 
-	
-	
 	public static int files() {
 		System.out.println("Indica les dimensions del taulell");
 		System.out.println("Entra un número de files>2 i <=12");
 		int files = Keyboard.readInt();
 
 		while (files <= 2 || files > 12) {
-			System.out.println("Incorrecte. Entra files files>2 i <=12");
+			System.out.println("Incorrecte.Entra files>2 i <=12");
 			files = Keyboard.readInt();
 		}
 
@@ -43,7 +41,7 @@ public class sessio1 {
 		return columnes;
 	}
 
-	public static void valor(int [][] tauler,int files, int columnes) {
+	public static int valor(int [][] tauler,int files, int columnes) {
 		int maxim = ((files * columnes) / 6);
 		System.out.println("Indica quantes bombetes vols encendre");
 		System.out.println("Especifica un valor dins de l'interval [0," + maxim + "]");
@@ -53,7 +51,7 @@ public class sessio1 {
 			System.out.println("Valor incorrecte.Ha d'estar dins de l'interval [0," + maxim + "]");
 			valor = Keyboard.readInt();
 		}
-		EncenAleatori(files, columnes, tauler, valor);
+		return valor;
 	}
 
 	public static void EncenAleatori(int files, int columnes, int tauler[][], int valor) {
@@ -213,15 +211,14 @@ public class sessio1 {
 		int [] encessos=new int [maxim];
 		int [] apagats=new int [maxim];
 		
-		for (int i = 1; i <= maxim; i++) {
-			System.out.println("Tirada " + i + ":");
+		for (int i = 0; i < maxim; i++) {
+			System.out.println("Tirada " + (i+1) + ":");
 			tirades(tauler,files, columnes);
 			encessos[i]=contador(tauler);
 			apagats[i]=(files*columnes)-encessos[i];
 			RecorreTauler(tauler);
 		}
-		System.out.println("Ja no tens més tirades.El joc ha acabat");
-		
+		revisioFinal(maxim,encessos,apagats);
 	}
 	
 	public static int contador (int [][] tauler){
@@ -237,17 +234,42 @@ public class sessio1 {
 	}
 	
 	public static void revisioFinal(int maxim,int [] encessos,int [] apagats){
-		int i=0;
-		while(i<maxim){
-			System.out.println("Tirada : "+i+++"---> tens "+encessos[i-1]+"encesos i "+apagats[i-1]+" apagades");	
+		System.out.println("Ja no tens més tirades.El joc ha acabat");
+		int i=1;
+		while(i<=maxim){
+			System.out.println("Tirada : "+i+"---> tens "+encessos[i-1]+" encesos i "+apagats[i-1]+" apagades");	
+			i++;
 		}
-		System.out.println("La tirada amb més bombetes apagades ha estat");//falta acabar aixo
-		
-		
+		System.out.println("La tirada amb més bombetes apagades ha estat la "+(Apagades(apagats)+1));
 	}
 	
+	public static int Apagades (int [] array){
+		int major = array[0];
+		int index= 0;
+		
+		for (int x=1;x<array.length;x++){
+			if (array[x]>major){
+				major = array[x];
+				index = x;
+			} 
+		}
+		return index;
+	}
 	
-	
+	public static void Finalitzacio (int files,int columnes,int valor,int [][] tauler){
+		
+		System.out.println("Vols fer una altre partida amb aquest taulell de ["+files+","+columnes+"] i amb "+valor+" bombetes enceses?(S/N)");
+		char resposta=Keyboard.readChar();
+		
+		if(resposta=='S'){
+			EncenAleatori(files,columnes,tauler,valor);
+			RecorreTauler(tauler);
+			bucle(tauler,files,columnes);
+			Finalitzacio(files,columnes,valor,tauler);
+		}else{
+			System.out.println("ADEU!");
+		}	
+	}
 	
 	
 
