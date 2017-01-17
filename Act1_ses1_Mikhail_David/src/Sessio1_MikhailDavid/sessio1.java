@@ -11,17 +11,11 @@ public class sessio1 {
 
 		int tauler[][] = new int[files][columnes]; // Creació del tauler
 
-		int valor = valor(files, columnes);
-		EncenAleatori(files, columnes, tauler, valor);
-		System.out.println("Encenem la posició: ");
+		valor(tauler,files, columnes);
 		RecorreTauler(tauler);
-
-		for (int i = 1; i <= NTirades(); i++) {
-			System.out.println("Tirada " + i + ":");
-			tirades(tauler,files, columnes);
-			RecorreTauler(tauler);
-		}
-
+		bucle(tauler,files,columnes);
+		
+		
 		
 	}
 
@@ -50,7 +44,7 @@ public class sessio1 {
 		return columnes;
 	}
 
-	public static int valor(int files, int columnes) {
+	public static void valor(int [][] tauler,int files, int columnes) {
 		int maxim = ((files * columnes) / 6);
 		System.out.println("Indica quantes bombetes vols encendre");
 		System.out.println("Especifica un valor dins de l'interval [0," + maxim + "]");
@@ -60,7 +54,7 @@ public class sessio1 {
 			System.out.println("Valor incorrecte.Ha d'estar dins de l'interval [0," + maxim + "]");
 			valor = Keyboard.readInt();
 		}
-		return valor;
+		EncenAleatori(files, columnes, tauler, valor);
 	}
 
 	public static void EncenAleatori(int files, int columnes, int tauler[][], int valor) {
@@ -78,8 +72,10 @@ public class sessio1 {
 				}
 				tauler[filaAleatoria][ColumnaAleatoria] = 1;
 			}
+			System.out.println("Encenem la posició "+filaAleatoria+","+ColumnaAleatoria);
 			i++;
 		}
+		
 		
 	}
 
@@ -203,7 +199,7 @@ public class sessio1 {
 	
 	}
 
-	private static void CanviEstat2(int[][] tauler, int fila, int columna){
+	public static void CanviEstat2(int[][] tauler, int fila, int columna){
 		
 		if(tauler[fila][columna]==1){
 			tauler[fila][columna]=0;
@@ -212,6 +208,15 @@ public class sessio1 {
 		}	
 	}
 	
+	public static void bucle(int [][] tauler,int files,int columnes){
+		
+		for (int i = 1; i <= NTirades(); i++) {
+			System.out.println("Tirada " + i + ":");
+			tirades(tauler,files, columnes);
+			RecorreTauler(tauler);
+		}
+		System.out.println("Ja no tens més tirades.El joc ha acabat");
+	}
 	
 	
 	
