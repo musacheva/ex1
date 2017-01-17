@@ -14,11 +14,10 @@ public class sessio1 {
 		valor(tauler,files, columnes);
 		RecorreTauler(tauler);
 		bucle(tauler,files,columnes);
-		
-		
-		
 	}
 
+	
+	
 	public static int files() {
 		System.out.println("Indica les dimensions del taulell");
 		System.out.println("Entra un número de files>2 i <=12");
@@ -210,16 +209,42 @@ public class sessio1 {
 	
 	public static void bucle(int [][] tauler,int files,int columnes){
 		
-		for (int i = 1; i <= NTirades(); i++) {
+		int maxim=NTirades();
+		int [] encessos=new int [maxim];
+		int [] apagats=new int [maxim];
+		
+		for (int i = 1; i <= maxim; i++) {
 			System.out.println("Tirada " + i + ":");
 			tirades(tauler,files, columnes);
+			encessos[i]=contador(tauler);
+			apagats[i]=(files*columnes)-encessos[i];
 			RecorreTauler(tauler);
 		}
 		System.out.println("Ja no tens més tirades.El joc ha acabat");
+		
 	}
 	
+	public static int contador (int [][] tauler){
+		int cont=0;
+		for(int i=0;i<tauler.length;i++){
+			for(int a=0;a<tauler[0].length;a++){
+				if(tauler[i][a]==1){
+					cont++;
+				}
+			}
+		}
+		return cont;
+	}
 	
-	
+	public static void revisioFinal(int maxim,int [] encessos,int [] apagats){
+		int i=0;
+		while(i<maxim){
+			System.out.println("Tirada : "+i+++"---> tens "+encessos[i-1]+"encesos i "+apagats[i-1]+" apagades");	
+		}
+		System.out.println("La tirada amb més bombetes apagades ha estat");//falta acabar aixo
+		
+		
+	}
 	
 	
 	
