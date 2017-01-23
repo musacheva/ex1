@@ -261,6 +261,10 @@ public class sessio1 {
 		System.out.println("Vols fer una altre partida amb aquest taulell de ["+files+","+columnes+"] i amb "+valor+" bombetes enceses?(S/N)");
 		char resposta=Keyboard.readChar();
 		
+		while(resposta != 'S'&& resposta != 'N'){
+			System.out.println("Resposta incorrecte, Introdueix S o N");
+			resposta= Keyboard.readChar();
+		}
 		if(resposta=='S'){
 			EncenAleatori(files,columnes,tauler,valor);
 			RecorreTauler(tauler);
